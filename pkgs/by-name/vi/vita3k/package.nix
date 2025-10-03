@@ -12,7 +12,7 @@ appimageTools.wrapType2 rec {
 
   src = fetchurl {
     url = "https://github.com/Vita3K/Vita3K-builds/releases/download/${version}/Vita3K-x86_64.AppImage";
-    sha256 = "sha256-9sjwqjJWSWMmc7HNaBHj7r7OtOYLzk4A59KO8luT8XM=";
+    hash = "sha256-9sjwqjJWSWMmc7HNaBHj7r7OtOYLzk4A59KO8luT8XM=";
   };
 
   nativeBuildInputs = [ makeWrapper ];
@@ -33,12 +33,13 @@ appimageTools.wrapType2 rec {
 
   passthru.updateScript = nix-update-script { };
 
-  meta = with lib; {
+  meta = {
     description = "Experimental PlayStation Vita emulator";
     homepage = "https://vita3k.org/";
-    license = licenses.gpl2Only;
-    maintainers = with maintainers; [ pilz0 ];
+    license = lib.licenses.gpl2Only;
+    maintainers = with lib.maintainers; [ pilz0 ];
     platforms = [ "x86_64-linux" ];
     mainProgram = "vita3k";
+    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
   };
 }
